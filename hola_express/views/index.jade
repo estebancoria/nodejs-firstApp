@@ -2,4 +2,24 @@ html
     head
         title Mi primera página con express
     body
-        h1!= variable
+        - var arreglo = [1,2,3,4,5];
+        - for (var i=arreglo.length - 1;i>=0;i--)
+            //Commentario
+            p= arreglo[i]
+            p!= "<h1>"+arreglo[i]+"</h1>"
+            p Hola #{arreglo[i]}
+            p.
+                Hola haz clicl en #[a(href="https://google.com") Link -> ]
+
+        //Condicionales
+        - if (true)
+            p Dentro del Condeicional
+        if true
+            p condicional sin parentesis y -
+        each item in arreglo
+            case item
+                when 1
+                    p el Item era 1, determinado con case
+                default
+                    p= item
+
