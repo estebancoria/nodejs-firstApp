@@ -1,6 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var user = require("./models/user").User;
+var User = require("./models/user.js").User;
 //conección con la base de datos obviously
 
 
@@ -23,14 +23,19 @@ app.get("/login", function (req, res) {
 });
 
 app.post("/users", function (req, res) {
-
+    console.log("Estamos dentro de /users");
     //creación del nuevo usuario
-    var user = new user(
+    var user = new User(
         {
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            password_confirmation: req.body.password_confirmation
         }
     );
+
+    console.log("Tenemos el nuevo Usuario");
+    console.log(user);
+    console.log("Aqui la confirmacion: "+user.password_confirmation);
 
     user.save(function () {
         res.send("Guardamos tus datos!.");
