@@ -1,28 +1,9 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+var user = require("./models/user").User;
 //conección con la base de datos obviously
-var mongoURI = "mongodb://localhost:27017/test";
-var MongoDB = mongoose.connect(mongoURI).connection;
-;
-MongoDB.on('error', function (err) {
-    console.log(err.message);
-});
-MongoDB.once('open', function () {
-    console.log("mongodb connection open");
-});
-//generación de tabla dummie
 
-var userSchemaJSON = {
-    email: String,
-    password: String
-};
 
-//esta clase schema se encarga de crear el documento en base al JSON
-var userSchema = new Schema(userSchemaJSON);
-
-var User = mongoose.model("User", userSchema);
 
 var app = express();
 
@@ -44,7 +25,7 @@ app.get("/login", function (req, res) {
 app.post("/users", function (req, res) {
 
     //creación del nuevo usuario
-    var user = new User(
+    var user = new user(
         {
             email: req.body.email,
             password: req.body.password
